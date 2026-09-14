@@ -1,0 +1,262 @@
+/* style.css */
+:root {
+  --bg-color: #000000;
+  --surface: #111111;
+  --surface-hover: #1a1a1a;
+  --border: #333333;
+  --border-hover: #555555;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent: #0070f3;
+  --accent-glow: rgba(0, 112, 243, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* System fonts ensure perfect rendering across all devices */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.glow-bg {
+  position: fixed;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, rgba(0,0,0,0) 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.container {
+  max-width: 1200px;
+  width: 100%;
+  padding: 4rem 2rem;
+  z-index: 1;
+  position: relative;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 5rem;
+  animation: fade-in-up 1s ease-out;
+}
+
+.badge-container {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Category Sections */
+.categories {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.category {
+  animation: fade-in-up 1s ease-out;
+}
+
+.category-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.75rem 0;
+  color: var(--text-primary);
+}
+
+.category-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 900px;
+}
+
+/* Grid & Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  background-color: var(--surface-hover);
+  border-color: var(--border-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card-icon {
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.card-icon img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: var(--text-primary);
+}
+
+.card-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .title {
+    font-size: 3rem;
+  }
+  .category-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* Floating Background Icons */
+.floating-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.floating-icon {
+  position: absolute;
+  opacity: 0;
+  animation: float 20s infinite linear;
+}
+
+/* Position and animate them randomly */
+.floating-icon:nth-child(1) { left: 10%; animation-duration: 25s; animation-delay: 0s; font-size: 4rem; }
+.floating-icon:nth-child(2) { left: 25%; animation-duration: 35s; animation-delay: -5s; font-size: 2.5rem; }
+.floating-icon:nth-child(3) { left: 40%; animation-duration: 28s; animation-delay: -12s; font-size: 3.5rem; }
+.floating-icon:nth-child(4) { left: 55%; animation-duration: 32s; animation-delay: -3s; font-size: 2rem; }
+.floating-icon:nth-child(5) { left: 70%; animation-duration: 40s; animation-delay: -18s; font-size: 5rem; }
+.floating-icon:nth-child(6) { left: 85%; animation-duration: 22s; animation-delay: -7s; font-size: 3rem; }
+.floating-icon:nth-child(7) { left: 15%; animation-duration: 30s; animation-delay: -10s; font-size: 2.8rem; }
+.floating-icon:nth-child(8) { left: 35%; animation-duration: 26s; animation-delay: -15s; font-size: 4.5rem; }
+.floating-icon:nth-child(9) { left: 65%; animation-duration: 38s; animation-delay: -2s; font-size: 2.2rem; }
+.floating-icon:nth-child(10) { left: 80%; animation-duration: 33s; animation-delay: -8s; font-size: 3.2rem; }
+.floating-icon:nth-child(11) { left: 5%; animation-duration: 29s; animation-delay: -20s; font-size: 4rem; }
+.floating-icon:nth-child(12) { left: 50%; animation-duration: 36s; animation-delay: -14s; font-size: 2.6rem; }
+.floating-icon:nth-child(13) { left: 95%; animation-duration: 24s; animation-delay: -1s; font-size: 3.8rem; }
+.floating-icon:nth-child(14) { left: 45%; animation-duration: 31s; animation-delay: -11s; font-size: 3rem; }
+.floating-icon:nth-child(15) { left: 75%; animation-duration: 27s; animation-delay: -6s; font-size: 4.2rem; }
+
+@keyframes float {
+  0% {
+    bottom: -10%;
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-50vh) rotate(180deg) scale(1.2);
+  }
+  90% {
+    opacity: 0.15;
+  }
+  100% {
+    bottom: 110%;
+    transform: translateY(-100vh) rotate(360deg) scale(1);
+    opacity: 0;
+  }
+}
